@@ -1,4 +1,5 @@
 const fs = require('fs');
+const ncp = require('ncp').ncp;
 const data = require('./data.json');
 
 if (!fs.existsSync('./_site')){
@@ -25,3 +26,10 @@ const content = `
 `;
 
 fs.writeFileSync('./_site/index.html', content, 'utf8');
+
+ncp('./admin', './_site/admin', function (err) {
+  if (err) {
+    return console.error(err);
+  }
+  console.log('Copied admin folder');
+ });
